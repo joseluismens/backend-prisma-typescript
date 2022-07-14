@@ -36,7 +36,7 @@ export default class UserController {
         const { nombres,apellidos, tipo_identificacion,identificacion,correo,telefono,password } = req.body;
        
         const verifyUsername = await prisma.user.findUnique({where:{ correo :correo }});
-        if (verifyUsername) return res.status(500).send({ message: "El nombre de usuario ya ha sido utilizado" });
+        if (verifyUsername) return res.status(500).send({ message: "El correo ya ha sido utilizado" });
         const errors = await validate(prisma.user);
 
         if (errors.length > 0) return res.status(400).send(errors);
